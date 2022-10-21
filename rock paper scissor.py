@@ -1,4 +1,4 @@
-from logging import error
+from logging import error, exception
 from pickle import TRUE
 import random
 
@@ -28,25 +28,34 @@ def gamewin(comp,you,galat):
             return False
         else:
             return galat
-print("Computer choosed : Rock, paper,scissor")
-randNo = random.randint(1,3)
-if randNo == 1:
-    comp = 'r'
-elif randNo==2:
-    comp = 'p'
-elif randNo == 3:
-        comp = 's'
-you = input("Your turn's: Rock (r) paper(p) scissor(s) ?")
-galat = ()
-a = gamewin(comp,you,galat)
-print(f"computer choosed : {comp}")
-print(f"You choosed : {you}")
-    
-if a == None:
-    print("The game is tie!")
-elif a==galat:
-    print(f"{you} is invalid command")
-elif a:
-    print("You win")
-else:
-    print("you lose")
+while (True):
+    print("Computer choosed : Rock, paper,scissor")
+    randNo = random.randint(1,3)
+    if randNo == 1:
+        comp = 'r'
+    elif randNo==2:
+        comp = 'p'
+    elif randNo == 3:
+            comp = 's'
+    try:
+        print("To exit enter q")
+        you = input("Your turn's: Rock (r) paper(p) scissor(s) ? : ")
+        galat = ()
+        if you=='q':
+            print("exited")
+            exit()
+        else:
+            a = gamewin(comp,you,galat)
+            print(f"computer choosed : {comp}")
+            print(f"You choosed : {you}")
+                
+            if a == None:
+                print("The game is tie!")
+            elif a==galat:
+                print(f"{you} is invalid command")
+            elif a:
+                print("You win")
+            else:
+                print("you lose")
+    except Exception as e:
+        print("invalid command")
